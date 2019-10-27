@@ -1,0 +1,45 @@
+step 1----yum install dhcp
+
+step 2-----
+
+copy this into by  vi /etc/dhcp/dhcpd.conf file
+Press i and paste 
+Then Press Esc and : then wq or q!
+
+
+subnet 192.168.8.0 netmask 255.255.255.0 {
+  range 192.168.8.10 192.168.8.20;
+  option domain-name-servers ns1.internal.example.org;
+  option domain-name "internal.example.org";
+  option routers 192.168.8.254;
+  option broadcast-address 192.168.8.255;
+  default-lease-time 600;
+  max-lease-time 7200;
+}
+
+Now,Provide one static i/p to server
+Go into Network Setting ->IPV4 -> Manual then 
+
+Put values as 
+Address -> 192.168.6.1
+NetMask -> 255.255.255.0
+GateWay -> 0.0.0.0
+
+step 3-----
+
+systemctl start dhcpd.service
+
+//OR 
+
+systemctl enable dhcpd.service
+
+//Join Cables 
+//Use ssh ipaddress command 
+//Then run yum remove wireshark
+//On Client Side Wireshark will be removed 
+
+//Or Use Python Command
+import os
+
+os.system("ssh 192.168.7.17")
+os.system("yum remove wireshark")
